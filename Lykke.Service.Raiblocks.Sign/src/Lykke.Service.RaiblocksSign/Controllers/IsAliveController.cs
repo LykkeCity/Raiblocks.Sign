@@ -27,7 +27,7 @@ namespace Lykke.Service.RaiblocksSign.Controllers
         [HttpGet]
         [SwaggerOperation("IsAlive")]
         [ProducesResponseType(typeof(IsAliveResponse), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(Models.ErrorResponse), (int)HttpStatusCode.InternalServerError)]
         public IActionResult Get()
         {
             var healthViloationMessage = _healthService.GetHealthViolationMessage();
@@ -35,7 +35,7 @@ namespace Lykke.Service.RaiblocksSign.Controllers
             {
                 return StatusCode(
                     (int)HttpStatusCode.InternalServerError,
-                    ErrorResponse.Create($"Service is unhealthy: {healthViloationMessage}"));
+                    Models.ErrorResponse.Create($"Service is unhealthy: {healthViloationMessage}"));
             }
 
             // NOTE: Feel free to extend IsAliveResponse, to display job-specific indicators

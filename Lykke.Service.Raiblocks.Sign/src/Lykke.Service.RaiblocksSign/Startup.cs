@@ -10,6 +10,8 @@ using Lykke.Logs;
 using Lykke.Service.RaiblocksSign.Core.Services;
 using Lykke.Service.RaiblocksSign.Core.Settings;
 using Lykke.Service.RaiblocksSign.Modules;
+using Lykke.Service.RaiblocksSign.Services;
+using Lykke.Service.RaiblocksSign.SignService.Core.Services;
 using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -59,6 +61,13 @@ namespace Lykke.Service.RaiblocksSign
                 Log = CreateLogWithSlack(services, appSettings);
 
                 builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.RaiblocksSignService), Log));
+
+                builder.RegisterType<TransactionService>()
+                    .As<ITransactionService>();
+
+                builder.RegisterType<WalletService>()
+                    .As<IWalletService>();
+
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
 

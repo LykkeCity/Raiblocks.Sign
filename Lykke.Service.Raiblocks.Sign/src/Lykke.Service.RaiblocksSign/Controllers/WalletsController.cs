@@ -1,4 +1,5 @@
 ﻿using Lykke.Service.RaiblocksSign.Models;
+using Lykke.Service.RaiblocksSign.SignService.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -12,6 +13,11 @@ namespace Lykke.Service.RaiblocksSign.Controllers
     [Route("api/[controller]")]
     public class WalletsController : Controller
     {
+        IWalletService _walletService;
+        public WalletsController(IWalletService walletService)
+        {
+            _walletService = walletService;
+        }
         /// <summary>
         /// Create a new wallet (address) in the blockchain
         /// </summary>
@@ -19,9 +25,9 @@ namespace Lykke.Service.RaiblocksSign.Controllers
         [HttpPost]
         [SwaggerOperation("CreateNewWallet")]
         [ProducesResponseType(typeof(NewWalletResponse), (int)HttpStatusCode.OK)]
-        public IActionResult CreateNewWallet()
+        public NewWalletResponse CreateNewWallet()
         {
-            throw new NotImplementedException();
+            return new NewWalletResponse(_walletService.CreateWallet());
         }
     }
 }

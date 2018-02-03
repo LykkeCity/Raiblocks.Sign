@@ -21,7 +21,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="libsign_service.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libsign_service.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
