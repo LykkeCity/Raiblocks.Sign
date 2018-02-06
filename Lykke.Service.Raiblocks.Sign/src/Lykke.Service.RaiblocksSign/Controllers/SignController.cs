@@ -32,8 +32,7 @@ namespace Lykke.Service.RaiblocksSign.Controllers
             var result = string.Empty;
             try
             {
-                var signedBlock = _transactionService.Sign(signRequest.Key, signRequest.Block);
-                result = JsonConvert.SerializeObject(signedBlock);
+                result = _transactionService.Sign(signRequest.Key, signRequest.Block);
             }
             catch (RaiBlocksSignException rbse)
             {

@@ -22,10 +22,10 @@ namespace Lykke.Service.RaiblocksSign.Services
             ref int errorCode
         );
 
-        public IRaiBlock Sign(string key, IRaiBlock raiBlock)
+        public string Sign(string key, IRaiBlock raiBlock)
         {
             int err = 0;
-            var signature = block_create_c(
+            var signedBlock = block_create_c(
                 raiBlock.type,
                 raiBlock.account,
                 raiBlock.destination,
@@ -41,8 +41,7 @@ namespace Lykke.Service.RaiblocksSign.Services
             {
                 throw new RaiBlocksSignException(err);
             }
-            raiBlock.signature = signature;
-            return raiBlock;
+            return signedBlock;
         }
 
     }

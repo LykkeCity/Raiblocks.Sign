@@ -4,6 +4,6 @@ namespace Lykke.Service.RaiblocksSign.SignService.Core.Services
 {
     public interface ITransactionService
     {
-        IRaiBlock Sign(string key, IRaiBlock raiBlock);
+        string Sign(string key, IRaiBlock raiBlock);
     }
 }
