@@ -29,7 +29,7 @@ Go to [http://localhost:5000/swagger/ui/#/](http://localhost:5000/swagger/ui/#/)
 # Implementation of methods of work with signature and key pairs
 
 To create SignService the original source code of RaiBlocks node is used which is compliled into libsign_service.dll. A SignService source code contains this compiled library as well as the facade that implemented required public methods.
-The facade contains two functions block_create_c and key_create that described in sign_service.cpp file. It is a lightweight implementation of RPC-methods block_create and key_create respectively. The method block_create_c don’t perform calculation of parameter “work” and expected the parameter “work” already contains in transaction parameters.
+The facade contains two functions block_create_c and key_create that described in sign_service.cpp file. It is a lightweight implementation of RPC-methods block_create and key_create respectively. The method block_create_c don’t perform calculation of a parameter “work” and expected the parameter “work” already contains in transaction parameters.
 
 [libsign_service.dll source code](https://github.com/artem-kruglov/raiblocks/tree/sign_service)  
 
