@@ -11,6 +11,7 @@
 *.sln text eol=crlf
 *.csproj text eol=crlf
 
+*.dll binary
 # Diff settings
 
 *.cs     diff=csharp text 
