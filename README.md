@@ -30,7 +30,7 @@ The SignService is the REST API for [libsign_service library](https://github.com
 
 # Updating the code base of libsign_service.dll
 
-To update a base code you should merge changes from upstream to [libsign_service.dll source code](https://github.com/artem-kruglov/raiblocks/tree/sign_service) and build. If you maintain compatibility in the interface of working with blocks, no additional changes of the the source code are required. After that you should replace the resulting dynamic library libsign_service.dll in a SignService instance.
+To update a base code you should merge changes from upstream to [libsign_service.dll source code](https://github.com/artem-kruglov/raiblocks/tree/sign_service) and build. If there is no breaking changes in work with blocks in upstream, no additional changes of the the source code are required. Otherwise you'll have to change facade methods. After that you should replace the resulting dynamic library libsign_service.dll in a SignService instance.
 Note: a library built for Linux have .SO extension, but the libsign_service is imported with .dll extension for universality:
 ```
 [DllImport("libsign_service.dll")]
