@@ -52,4 +52,4 @@ make rai_node
 # See also
  - [RaiBlocks Integration API Service](https://github.com/LykkeCity/Raiblocks.Api)
 
- - [Test private RaiBlocks node with custom generis block](https://github.com/artem-kruglov/raiblocks/tree/testnet)
+ - [Test private RaiBlocks node with a custom generis block](https://github.com/artem-kruglov/raiblocks/tree/testnet)
