@@ -6,7 +6,7 @@ namespace Lykke.Service.RaiblocksSign.Services
     public class WalletService : IWalletService
     {
 
-        [DllImport("libsign_service.so")]
+        [DllImport("libsign_service.dll")]
         public static extern string key_create();
 
         public (string key, string address) CreateWallet()
