@@ -8,7 +8,7 @@ namespace Lykke.Service.RaiblocksSign.Services
 {
     public class TransactionService : ITransactionService
     {
-        [DllImport("libsign_service.dll")]
+        [DllImport("libsign_service")]
         public static extern string block_create_c(
             string type_text,
             string account_text,
