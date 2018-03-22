@@ -1,4 +1,5 @@
-﻿using Lykke.Service.RaiblocksSign.Core.Services;
+﻿using Common.Log;
+using Lykke.Service.RaiblocksSign.Core.Services;
 using Lykke.Service.RaiblocksSign.Models;
 using Lykke.Service.RaiblocksSign.SignService.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace Lykke.Service.RaiblocksSign.Controllers
     public class SignController : Controller
     {
         readonly ITransactionService _transactionService;
-        public SignController(ITransactionService transactionService)
+        readonly ILog _logService;
+        public SignController(ITransactionService transactionService, ILog logService)
         {
             _transactionService = transactionService;
+            _logService = logService;
         }
         /// <summary>
         /// Sign given transaction with the given private key
@@ -27,6 +30,7 @@ namespace Lykke.Service.RaiblocksSign.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logService.WriteError("SignTransaction", "ModelState is invalid");
                 return BadRequest(ErrorResponse.Create(ModelState));
             }
             var result = string.Empty;
@@ -36,10 +40,12 @@ namespace Lykke.Service.RaiblocksSign.Controllers
             }
             catch (RaiBlocksSignException rbse)
             {
+                _logService.WriteError("SignTransaction", "", rbse);
                 return BadRequest(rbse);
             }
             catch (Exception e)
             {
+                _logService.WriteError("SignTransaction", "", e);
                 return BadRequest(e);
             }
 
