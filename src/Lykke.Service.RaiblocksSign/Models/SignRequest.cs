@@ -65,7 +65,7 @@ namespace Lykke.Service.RaiblocksSign.Models
             Init();
 
             //TODO: Add another validation rules for Block.
-            if (string.IsNullOrWhiteSpace(Block.type))
+            if (string.IsNullOrWhiteSpace(Block?.type))
             {
                 result.Add(new ValidationResult("Invalid block data", new[] { nameof(TransactionContext) }));
             }
