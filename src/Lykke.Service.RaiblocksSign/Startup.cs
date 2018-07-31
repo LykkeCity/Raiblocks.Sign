@@ -7,6 +7,7 @@ using Common.Log;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
+using Lykke.MonitoringServiceApiCaller;
 using Lykke.Service.RaiblocksSign.Core.Services;
 using Lykke.Service.RaiblocksSign.Core.Settings;
 using Lykke.Service.RaiblocksSign.Modules;
@@ -24,6 +25,7 @@ namespace Lykke.Service.RaiblocksSign
 {
     public class Startup
     {
+        private string _monitoringServiceUrl;
         public IHostingEnvironment Environment { get; }
         public IContainer ApplicationContainer { get; private set; }
         public IConfigurationRoot Configuration { get; }
@@ -57,6 +59,10 @@ namespace Lykke.Service.RaiblocksSign
 
                 var builder = new ContainerBuilder();
                 var appSettings = Configuration.LoadSettings<AppSettings>();
+                if (appSettings.CurrentValue.MonitoringServiceClient != null)
+                {
+                    _monitoringServiceUrl = appSettings.CurrentValue.MonitoringServiceClient.MonitoringServiceUrl;
+                }
 
                 Log = CreateLogWithSlack(services, appSettings);
 
@@ -123,6 +129,12 @@ namespace Lykke.Service.RaiblocksSign
                 await ApplicationContainer.Resolve<IStartupManager>().StartAsync();
 
                 await Log.WriteMonitorAsync("", $"Env: {Program.EnvInfo}", "Started");
+
+#if (!DEBUG)
+
+                await AutoRegistrationInMonitoring.RegisterAsync(Configuration, _monitoringServiceUrl, Log);
+
+#endif
             }
             catch (Exception ex)
             {

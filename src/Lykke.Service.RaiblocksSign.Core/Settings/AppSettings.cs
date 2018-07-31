@@ -7,5 +7,6 @@ namespace Lykke.Service.RaiblocksSign.Core.Settings
     {
         public RaiblocksSignSettings RaiblocksSignService { get; set; }
         public SlackNotificationsSettings SlackNotifications { get; set; }
+        public MonitoringServiceClientSettings MonitoringServiceClient { get; set; }
     }
 }

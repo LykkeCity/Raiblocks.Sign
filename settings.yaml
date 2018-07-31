@@ -6,6 +6,10 @@ RaiblocksApiService:
                 - AzureBlobStorage
                 - Tag
 
+MonitoringServiceClient:
+    MonitoringServiceUrl:
+        settings-key: MonitoringServiceUrl 
+
 SlackNotifications:
     AzureQueue:
         ConnectionString:
