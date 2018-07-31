@@ -1,0 +1,16 @@
+RaiblocksApiService:
+    Db:
+        LogsConnString:
+            settings-key: "RaiblocksSignService-LogsConnString"
+            types:
+                - AzureBlobStorage
+                - Tag
+
+SlackNotifications:
+    AzureQueue:
+        ConnectionString:
+            settings-key: SlackNotificationsConnString
+            types:
+                - AzureTableStorage
+        QueueName:
+            settings-key: SlackQueueName
