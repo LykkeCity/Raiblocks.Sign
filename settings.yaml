@@ -1,4 +1,4 @@
-RaiblocksApiService:
+RaiblocksSignService:
     Db:
         LogsConnString:
             settings-key: "RaiblocksSignService-LogsConnString"
