@@ -4,12 +4,11 @@
     {
         string type { get; set; }
         string account { get; set; }
-        string destination { get; set; }
-        string source { get; set; }
-        string amount { get; set; }
-        string work { get; set; }
-        string previous { get; set; }
+        string representative { get; set; }
+        string link { get; set; }
         string balance { get; set; }
+        string previous { get; set; }
+        string work { get; set; }
 
         string signature { get; set; }
     }

@@ -26,19 +26,29 @@ Go to [http://localhost:5000/swagger/ui/#/](http://localhost:5000/swagger/ui/#/)
 
 # Implementation
 
-The SignService is the REST API for [libsign_service library](https://github.com/artem-kruglov/raiblocks/tree/sign_service). The libsign_service.so is an implementation of methods of work with signature and key pairs, which contains the full source code of RaiBlocks node as well as the facade that implements required for SignService methods. The facade contains two functions: block_create_c and key_create which are described in [sign_service.cpp](https://github.com/artem-kruglov/raiblocks/blob/sign_service/rai/node/sign_service.cpp) file. This functions are lightweight implementation of RPC-methods block_create and key_create respectively. The method block_create_c doesn’t perform calculation of a “work” argument and expects it to be among unsigned transaction fields.
+The SignService is the REST API for [libsign_service library](https://github.com/LykkeCity/Raiblocks.SignFacade). The libsign_service.so is an implementation of methods of work with signature and key pairs, which contains the full source code of RaiBlocks node as well as the facade that implements required for SignService methods. The facade contains two functions: block_create_c and key_create which are described in [sign_service.cpp](https://github.com/LykkeCity/Raiblocks.SignFacade) file. This functions are lightweight implementation of RPC-methods block_create and key_create respectively. The method block_create_c doesn’t perform calculation of a “work” argument and expects it to be among unsigned transaction fields.
 
 
-# Updating the code base of libsign_service[.so|.dll]
+# Updating the code base of libsign_service
 
-To update a base code you should merge changes from upstream to [libsign_service source code](https://github.com/artem-kruglov/raiblocks/tree/sign_service) and build. If there are no breaking changes in work with blocks in upstream, no additional changes of the the source code are required. Otherwise you'll have to change facade methods. After that you should replace the resulting dynamic library libsign_service.dll in a SignService instance.
-Note: a library built for Linux have .so extension, for Windows have .dll extension
+To update a base code you should rebuild library after pulling latest raiblock changes. If there are no breaking changes in work with blocks in upstream, no additional changes of the the source code are required. Otherwise you'll have to change facade methods. After that you should replace the resulting dynamic library libsign_service in a SignService instance.
 ```
 [DllImport("libsign_service")]
 ```
 have automatically loads libsign_service with extension according to current runtime enviroment, but it's stil need to provide valid image format (compile libsign_service with Windows toolchain for Windows runtime, or compile libsign_service with Linux toolchain for Linux runtime).
 
-To build libsign_service.so follow [Build Instructions](https://github.com/nanocurrency/raiblocks/wiki/Build-Instructions). Note, you should 
+To build libsign_service:
+Update all submodules:
+```
+git submodule update --init --recursive
+```
+
+Patch raiblocks cmake file:
+```
+chmod a+x cmake_patch.sh && ./cmake_patch.sh
+```
+
+Then follow [Build Instructions](https://github.com/nanocurrency/raiblocks/wiki/Build-Instructions), to build raiblocks submodule, but you should call
 ```
 make sign_service 
 ```
